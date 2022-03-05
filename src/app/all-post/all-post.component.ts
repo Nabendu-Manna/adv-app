@@ -2,7 +2,6 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Select, Store } from '@ngxs/store';
 import { Observable, Subscription } from 'rxjs';
 import { Post } from '../models/post.model';
-import { PostService } from '../service/post.service';
 import { GetAllPost } from '../store/actions/post.action';
 import { PostState } from '../store/state/post.state';
 
@@ -20,7 +19,6 @@ export class AllPostComponent implements OnInit, OnDestroy {
   @Select(PostState.getPostLoaded) postLoaded$!: Observable<boolean>;
 
   constructor(
-    private postService: PostService,
     private store : Store
   ) { }
 
@@ -37,8 +35,6 @@ export class AllPostComponent implements OnInit, OnDestroy {
 
   getAllPostData(){
     this.postLoadedSub = this.postLoaded$.subscribe( postLoaded => {
-      console.log(postLoaded, "postLoaded");
-
       if(!postLoaded)
         this.store.dispatch(new GetAllPost());
     })

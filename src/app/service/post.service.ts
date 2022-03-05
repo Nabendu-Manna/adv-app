@@ -8,13 +8,14 @@ import { Observable } from 'rxjs';
 })
 export class PostService {
   getAllPostUrl: string;
-  getPostDetailsUrl: string;
   constructor(private httpClient:HttpClient) {
-    this.getAllPostUrl = "https://jsonplaceholder.typicode.com/photos";
-    this.getPostDetailsUrl = "https://jsonplaceholder.typicode.com/posts/";
+    this.getAllPostUrl = "https://jsonplaceholder.typicode.com/posts";
   }
 
   getAllPost(): Observable<Post[]>{
     return this.httpClient.get<Post[]>(this.getAllPostUrl);
+  }
+  getPostById(id: number): Observable<Post>{
+    return this.httpClient.get<Post>(this.getAllPostUrl+"/"+id);
   }
 }

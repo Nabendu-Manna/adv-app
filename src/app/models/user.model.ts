@@ -1,4 +1,6 @@
 export interface User{
-  mobile: number;
+  mobile: string;
   password: string;
+  email: string,
+  isLogIn: boolean,
 }
